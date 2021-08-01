@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}
+{{cat_name}}
+{% endblock title %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'blog/css/home.css'%}" />
+{% if item %}
+ <div class="cap">
+   {% for item in item %}
+  <div class="card">
+  {% if item.image %}
+    <img
+    src="{{item.image.url}}"
+      alt="Avatar"
+      class="img"
+    />
+    {% else %}
+    <img
+      src="{% static 'user.jpg' %}"
+      alt="Avatar"
+      class="img"
+    />
+  {% endif %}
+    <div class="container">
+     <a href="{% url 'detail' item.id %}"> <h3><b>{{item.title}}</b></h3></a>
+      <a href="{% url 'detail' item.id %}"><h6>{{item.body|slice:50 }}...</h6></a>
+     <a href="{% url 'detail' item.id %}"> <p>By -{{item.author}}</p></a>
+     <p>Category-{{item.category}}</p>
+     <p>Created on-{{item.created}}</p>
+     <p>Updated on-{{item.updated}}</p>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% else %}
+<h4>No Post yet</h4>
+
+{% endif %}
+
+{% endblock content %}
+

@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+{% block title %}Add Category{% endblock title %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <label class="form-label" for="name">Enter the category name</label>
+    <input  class="form-control body"  type="text" id="name" name="name">
+    <input style="margin-top: 1rem;" type="submit" value="Add">
+</form>
+{% endblock content %}
+

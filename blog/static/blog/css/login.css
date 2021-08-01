@@ -1,0 +1,32 @@
+h3{
+    font-size: 2rem ;
+    text-align: center;
+}
+.container{
+    height: 20rem;
+    width: 20rem;
+    
+    margin-top: 8rem;
+    background-color: whitesmoke;
+    align-content: center;
+    border-radius: 10px;
+}
+.username{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.password {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+button{
+    align-self: center;
+  
+    margin-left: 40%;
+    margin-right: 50%;
+    font-size: 1.3rem;
+    border-radius: 5px;
+}
+label{
+    font-size: 1.3rem;
+}

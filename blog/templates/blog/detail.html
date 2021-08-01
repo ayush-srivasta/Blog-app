@@ -1,0 +1,71 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}Detail Page{% endblock title %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'blog/css/detail.css' %}">
+<div class="img-c">
+    
+    {% if post.image %}
+    <img  src="{{post.image.url}}" alt="This is the image" style="width: 100% ; border-radius: 28px;">
+    {% else %}
+    <img  src="{% static 'user.jpg' %}" alt="This is the image" style="width: 100%;border-radius: 28px;">
+    
+    {% endif %}
+</div>
+<div class="container">
+    <h2 style="margin-top: 2rem;">{{post.title}}</h2>
+    <h5>{{post.body}}</h5>
+    <p>Created on- {{post.created}}</p>
+    <p>Number of likes- {{post.like_count}}</p>
+</div>
+{% if status %}
+<form action="{% url 'like' post.id %}" method="post">
+   {% csrf_token %}
+    <h6 style="text-align: center;">Liked this post ? Give it a like</h6>
+    {% if lstatus %}
+    <button  name="post_id" value="{{post.id}}" class="btn-small button-edit center" style="text-align: center;" type='submit' >Like</button>
+    {% else %}
+    <button  name="post_id" value="{{post.id}}" class="btn-small button-edit center" style="text-align: center; background:white; color:black" type='submit' >UnLike</button>
+    {% endif %}
+</form>
+{% endif %}
+{% if same %}
+<form action="{% url 'delete' post.id %}" method="POST">
+    {% csrf_token %}
+    
+        <div class="btn-group">
+              <button class="btn-small button-edit edit" name="edit" type="submit" >Edit</button>
+              <button class="btn-danger  btn-small button-del edit"  name="delete" type="submit" style="background-color: red;">Delete</button>
+        </div>
+    
+</form>
+{% endif %}
+<h4 class="mid" style="margin-bottom: 2rem ;">Comments</h4>
+{% if comment %}
+{% for item in comment %}
+<h6 class="mid" >Comment by-{{item.author}}</h6>
+
+<h6 class="mid" style="margin-left: 2rem;">{{item}}</h6>
+{% if status  and item.author == user or item.post.author == user %}
+
+<form action="{% url 'deleteComment' item.pk %}" method="post">
+    {% csrf_token %}
+<button class="mid btn-danger" style="margin-left: 2rem; background-color: red; border-radius: 10px;" name="delete" type="submit">Delete</button>
+</form>
+
+{% endif %}
+<hr> 
+{% endfor %}
+{% else %}
+<h6>Be the first one to comment</h6>
+{% endif %}
+{% if status %}
+<form action={% url 'comment' post.id %}  method="POST">
+{% csrf_token %}
+<lable class="mid" for="body">Enter the comment</lable>
+<input type="text" style="width: 45%; margin-left: 1rem;" name="body" id="body">
+<br>
+<input class="mid" style="margin-bottom: 1rem ;margin-top:1rem;" type="submit" value="comment">
+</form>
+{% endif %}
+{% endblock content %}

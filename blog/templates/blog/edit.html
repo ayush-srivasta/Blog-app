@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% block title %}Edit page{% endblock title %}Edit page
+{% block content %}
+<form action="{% url 'edit' post.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" value="{{post.title}}"> 
+    <label for="body">Body</label>
+    <input type="text" id="body" name="body" value="{{post.body}}">
+  
+    <label for="category">Category</label>
+    <select name="category" id="category">
+        {% for cat in cat  %}
+        <option value="{{cat}}">{{cat}}</option>
+        {% endfor %}
+    </select>
+    <label for="image">Image</label>
+    <input type="file" id="image" name="image" value="{{post.image}}" >
+    <input type="submit" value="Edit">
+</form>
+{% endblock content %}
+

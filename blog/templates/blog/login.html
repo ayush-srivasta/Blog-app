@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}Login{%endblock title %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'blog/css/login.css' %}" />
+<div class="container">
+<h3>Login</h3>
+  <form action="" method="post">
+  {% csrf_token %}
+  {% if error %}
+  {{error}}
+  {% endif %}
+    <div class="username">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username"/>
+    </div>
+    <div class="password">
+      <label for="password" >Password:</label>
+      <input type="password" id="password" name="password" />
+    </div>
+    <button type="submit">Login</button>
+  </form>
+</div>
+{% endblock content %}
