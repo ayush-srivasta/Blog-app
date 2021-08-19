@@ -85,6 +85,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+SECRET_KEY = 'django-insecure-*le@hf_tah5y5=!$ic57sh$v!-!%3px7b=_!93&#=ir^m=0d4h'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
